@@ -11,6 +11,9 @@
                     folsom
                    ]},
     {mod, { navistats_app, []}},
+    {start_phases, [
+        {init_metrics, []}
+    ]},
     {env, [
         {collect_interval, 60},     % Интервал сохранения статистики
         {collect_path, "./stats/"}, % Каталог, в который сохраняется статистика
