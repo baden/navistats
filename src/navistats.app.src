@@ -1,0 +1,19 @@
+%% -*- mode: erlang -*-
+{application, navistats, [
+    {description, "Statistic module. Helper and collector."},
+    {vsn, "0.0.1"},
+    {id, "git"},
+    {modules, []},
+    {registered, []},
+    {applications, [
+                    kernel,
+                    stdlib,
+                    folsom
+                   ]},
+    {mod, { navistats_app, []}},
+    {env, [
+        {collect_interval, 60},     % Интервал сохранения статистики
+        {collect_path, "./stats/"}, % Каталог, в который сохраняется статистика
+        {meter_table, navistats_meters} % ets таблица для сохранения состояния
+    ]}
+]}.
