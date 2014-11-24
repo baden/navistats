@@ -28,6 +28,7 @@ application_start_supervisor(_) ->
     ok.
 
 database(_) ->
+    % Вообще-то это неправильная проверка. Нужно вычислить путь.
     ?assertEqual(true, filelib:is_dir("stats")),
     ?assertMatch({ok, _}, {ok, <<"some">>}),
     ok.
