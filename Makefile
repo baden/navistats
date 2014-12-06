@@ -10,11 +10,11 @@ PLT_APPS = crypto public_key
 
 # Dependencies.
 
-DEPS = jsxn folsom
+DEPS = jsx folsom
 #  bear
 
 dep_jsx = git git://github.com/baden/jsx.git develop
-dep_jsxn = git git://github.com/talentdeficit/jsxn.git v2.1.1
+#dep_jsxn = git git://github.com/talentdeficit/jsxn.git v2.1.1
 dep_folsom = git https://github.com/baden/folsom.git 0.8.1-erlang.mk
 # dep_bear = git git://github.com/baden/bear.git master
 
