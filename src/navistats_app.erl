@@ -25,9 +25,15 @@ start_phase(init_metrics, _Type, _Args) ->
     ok = folsom_metrics:new_counter(point_error),
     ok = folsom_metrics:new_counter(point_error_crc),
     ok = folsom_metrics:new_counter(point_error_data),
-    % ok = folsom_metrics:new_histogram(point_duration), % Статистика примерно по последним 1028 запросам
-    % ok = folsom_metrics:new_histogram(point_duration, slide_uniform), % Статистика за последнюю минуту
-    ok = folsom_metrics:new_histogram(point_duration, slide_sorted), % Статистика точно по последним 1028 запросам
+
+    % Статистика примерно по последним 1028 запросам
+    % ok = folsom_metrics:new_histogram(point_duration),
+
+    % Статистика за последнюю минуту
+    % ok = folsom_metrics:new_histogram(point_duration, slide_uniform),
+
+    % Статистика точно по последним 1028 запросам
+    ok = folsom_metrics:new_histogram(point_duration, slide_sorted),
     % ok = folsom_metrics:new_histogram(point_duration2),
     % ok = folsom_metrics:new_duration(point_duration),
     ok.

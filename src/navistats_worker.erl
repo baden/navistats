@@ -38,7 +38,12 @@ start_link() ->
     {ok, CollectPath} = application:get_env(?APP, collect_path),
     {ok, MeterTable} = application:get_env(?APP, meter_table),
 
-    gen_server:start_link({local, ?SERVER}, ?MODULE, {CollectInterval, CollectPath, MeterTable}, []).
+    gen_server:start_link(
+        {local, ?SERVER},
+        ?MODULE,
+        {CollectInterval, CollectPath, MeterTable},
+        []
+    ).
 
 %% ------------------------------------------------------------------
 %% gen_server Function Definitions
@@ -74,7 +79,8 @@ handle_cast(_Msg, State) ->
     {stop, unknown_cast, State}.
 
 %% @doc Plain message handling callback.
--spec handle_info(term(), state()) -> {stop, term(), state()} | {noreply, state()}.
+-spec handle_info(term(), state()) ->
+    {stop, term(), state()} | {noreply, state()}.
 handle_info(
     flush_metrics,
     #state{
@@ -84,10 +90,14 @@ handle_info(
     } = State
 ) ->
     Dumpfile = filename:join(CollectPath, "meters.txt"),
-    Timestamp = timer:now_diff(os:timestamp(), {0,0,0}) div 1000,
+    Timestamp = timer:now_diff(os:timestamp(), {0, 0, 0}) div 1000,
 
     Metric = prepare(folsom_metrics:get_metric_value(point_meter)),
-    ok = file:write_file(Dumpfile, [io_lib:format("~p: ~p~n", [Timestamp, Metric])], [append]),
+    ok = file:write_file(
+        Dumpfile,
+        [io_lib:format("~p: ~p~n", [Timestamp, Metric])],
+        [append]
+    ),
     % lists:foreach(
     %     fun({Tag, FileName}) ->
     %         Dumpfile = filename:join(CollectPath, FileName),
@@ -96,7 +106,13 @@ handle_info(
     %             ok ->
     %                 ok;
     %             Reason ->
-    %                 error(unknown, io_lib:format("Failed to dump metrics to file ~p with reason ~p",[Dumpfile, Reason]))
+    %                 error(
+    %                   unknown,
+    %                   io_lib:format(
+    %                       "Failed to dump metrics to file ~p with reason ~p",
+    %                       [Dumpfile, Reason]
+    %                   )
+    %                 )
     %         end
     %     end, MetricsTags
     % ),

@@ -1,6 +1,7 @@
 .eunit
 deps
 *.o
+*.d
 *.beam
 *.plt
 erl_crash.dump
@@ -14,3 +15,6 @@ test/*.beam
 test/Mnesia*
 Mnesia*
 .erlang.mk.packages.*
+.erlang.mk/
+xrefr
+elvis

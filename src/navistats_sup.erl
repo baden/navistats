@@ -26,7 +26,18 @@ start_link() ->
 %% ===================================================================
 
 %% @doc Supervisor behaviour entry point.
--spec init(term()) -> {ok, {{supervisor:strategy(), non_neg_integer(), non_neg_integer()}, [supervisor:child_spec()]}}.
+-spec init(term()) ->
+    {
+        ok,
+        {
+            {
+                supervisor:strategy(),
+                non_neg_integer(),
+                non_neg_integer()
+            },
+            [supervisor:child_spec()]
+        }
+    }.
 init([]) ->
     Worker = ?CHILD(navistats_worker, worker),
     {ok, { {one_for_one, 5, 10}, [Worker]} }.
